@@ -1,63 +1,98 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("registro-form");
-  const turnoSelect = document.getElementById("turno");
-  const mensaje = document.getElementById("mensaje");
+// app.js
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbxacGgfEVO-Kas5RsfXmAq-cC08c5BEQwqIXC-pjt_HjrRsTdcPVCAYkME0hHsJiFR6/exec";
+const db = window.firestore;
+const form = document.getElementById("registro-form");
+const mensaje = document.getElementById("mensaje");
+const cuposManiana = document.getElementById("cuposManiana");
+const cuposTarde = document.getElementById("cuposTarde");
+const MAX_CUPO = 12;
 
-  // ✅ Actualiza cupos al cargar
-  fetch(`${URL_SCRIPT}?action=cupos`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("cuposManiana").innerText = data["Turno Mañana"];
-      document.getElementById("cuposTarde").innerText = data["Turno Tarde"];
-    });
+async function actualizarCupos() {
+  const q = query(collection(db, "inscripciones"));
+  const querySnapshot = await getDocs(q);
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  let cuenta = { "Mañana": 0, "Tarde": 0 };
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.turno === "Mañana") cuenta["Mañana"]++;
+    if (data.turno === "Tarde") cuenta["Tarde"]++;
+  });
 
-    // 📦 Obtener datos del formulario
-    const datos = {
-      nombre: form.nombre.value.trim(),
-      dni: form.dni.value.trim(),
-      area: form.area.value.trim(),
-      legajo: form.legajo.value.trim(),
-      correo: form.correo.value.trim(),
-      turno: form.turno.value
-    };
+  cuposManiana.textContent = MAX_CUPO - cuenta["Mañana"];
+  cuposTarde.textContent = MAX_CUPO - cuenta["Tarde"];
+}
 
-    // 🚨 Validación rápida
-    if (Object.values(datos).some(v => v === "")) {
-      mensaje.innerText = "Por favor completá todos los campos.";
-      mensaje.style.color = "red";
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  mensaje.textContent = "";
+
+  const nombre = form.nombre.value.trim();
+  const dni = form.dni.value.trim();
+  const area = form.area.value.trim();
+  const legajo = form.legajo.value.trim();
+  const correo = form.correo.value.trim();
+  const turno = form.turno.value;
+
+  if (!nombre || !dni || !area || !legajo || !correo || !turno) {
+    mensaje.textContent = "Por favor, completá todos los campos.";
+    return;
+  }
+
+  try {
+    // Verificar duplicado por DNI o legajo
+    const q = query(
+      collection(db, "inscripciones"),
+      where("dni", "==", dni)
+    );
+    const q2 = query(
+      collection(db, "inscripciones"),
+      where("legajo", "==", legajo)
+    );
+    const [snap1, snap2] = await Promise.all([getDocs(q), getDocs(q2)]);
+
+    if (!snap1.empty || !snap2.empty) {
+      mensaje.textContent = "Ya estás registrado en este taller.";
       return;
     }
 
-    // ⏳ Enviar datos al Apps Script
-    fetch(URL_SCRIPT, {
-      method: "POST",
-      body: JSON.stringify(datos),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    .then(res => res.json())
-    .then(res => {
-      mensaje.innerText = res.mensaje;
-      mensaje.style.color = res.exito ? "green" : "red";
-      if (res.exito) form.reset();
+    // Verificar cupo
+    const q3 = query(
+      collection(db, "inscripciones"),
+      where("turno", "==", turno)
+    );
+    const inscriptosTurno = await getDocs(q3);
 
-      // 🔁 Refrescar cupos
-      return fetch(`${URL_SCRIPT}?action=cupos`);
-    })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("cuposManiana").innerText = data["Turno Mañana"];
-      document.getElementById("cuposTarde").innerText = data["Turno Tarde"];
-    })
-    .catch(() => {
-      mensaje.innerText = "Ocurrió un error. Intente más tarde.";
-      mensaje.style.color = "red";
+    if (inscriptosTurno.size >= MAX_CUPO) {
+      mensaje.textContent = `El cupo para el turno ${turno} está completo.`;
+      return;
+    }
+
+    // Agregar a la base de datos
+    await addDoc(collection(db, "inscripciones"), {
+      nombre,
+      dni,
+      area,
+      legajo,
+      correo,
+      turno,
+      timestamp: new Date()
     });
-  });
+
+    // Redirigir a página de agradecimiento
+    window.location.href = "gracias.html";
+
+  } catch (error) {
+    console.error("Error al enviar:", error);
+    mensaje.textContent = "Ocurrió un error. Intentá de nuevo más tarde.";
+  }
 });
+
+// Al cargar la página
+actualizarCupos();

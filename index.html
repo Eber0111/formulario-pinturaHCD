@@ -1,61 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inscripción Taller de Pintura</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- LOGO -->
-  <img src="assets/logo.png" alt="Logo Desarrollo Humano" class="logo">
-
-  <!-- CUADROS DE INFO DE TURNOS -->
-  <div class="turnos-info">
-    <div class="turno-card">
-      <h3>Turno Mañana</h3>
-      <p>Total de Asientos: 12</p>
-      <p>Disponibles: <span id="cuposManiana">-</span></p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inscripción Taller de Pintura</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- LOGO -->
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="Logo Dirección de Desarrollo Humano" class="logo" />
     </div>
-    <div class="turno-card tarde">
-      <h3>Turno Tarde</h3>
-      <p>Total de Asientos: 12</p>
-      <p>Disponibles: <span id="cuposTarde">-</span></p>
+
+    <!-- TÍTULO -->
+    <h1 class="titulo">Inscripción al Taller de Pintura</h1>
+
+    <!-- FORMULARIO -->
+    <div class="form-container">
+      <form id="registro-form">
+        <label for="nombre">Apellido y Nombre</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="dni">DNI Nº</label>
+        <input type="number" id="dni" name="dni" required />
+
+        <label for="area">Área</label>
+        <input type="text" id="area" name="area" required />
+
+        <label for="legajo">Legajo</label>
+        <input type="text" id="legajo" name="legajo" required />
+
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" name="correo" required />
+
+        <label for="turno">Turno</label>
+        <select id="turno" name="turno" required>
+          <option value="">Seleccioná un turno</option>
+          <option value="Mañana">Mañana (12)</option>
+          <option value="Tarde">Tarde (12)</option>
+        </select>
+
+        <!-- TARJETAS DE TURNOS -->
+        <div class="turnos-info">
+          <div class="turno-card manana">
+            <strong>Mañana (12)</strong>
+            <p>Disponible lugar: <span id="cuposManiana">-</span></p>
+          </div>
+          <div class="turno-card tarde">
+            <strong>Tarde (12)</strong>
+            <p>Disponible lugar: <span id="cuposTarde">-</span></p>
+          </div>
+        </div>
+
+        <!-- MENSAJE DE VALIDACIÓN -->
+        <p id="mensaje" class="mensaje"></p>
+
+        <!-- BOTÓN DE ENVÍO -->
+        <button type="submit" class="btn-enviar">Enviar inscripción</button>
+      </form>
     </div>
-  </div>
 
-  <!-- FORMULARIO -->
-  <div class="container">
-    <h1>Inscripción al Taller de Pintura</h1>
-    <form id="registro-form">
-      <label>Apellido y Nombre</label>
-      <input type="text" name="nombre" required>
+      <!-- Firebase SDK -->
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-      <label>DNI Nº</label>
-      <input type="number" name="dni" required>
+        const firebaseConfig = {
+        apiKey: "AIzaSyAkbxmxmfUOZQn63FXduw73yq9V8pTwY8s",
+        authDomain: "formulariohcd.firebaseapp.com",
+        projectId: "formulariohcd",
+        storageBucket: "formulariohcd.firebasestorage.app",
+        messagingSenderId: "553137543966",
+        appId: "1:553137543966:web:c67980fe49501778e9c70f"
+      };
 
-      <label>Área</label>
-      <input type="text" name="area" required>
 
-      <label>Legajo</label>
-      <input type="text" name="legajo" required>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        window.firestore = db; // Lo hacemos global para usarlo en app.js
+      </script>
+      <script src="app.js" type="module"></script>
 
-      <label>Correo</label>
-      <input type="email" name="correo" required>
-
-      <label>Turno</label>
-      <select name="turno" id="turno" required>
-        <option value="">Seleccioná un turno</option>
-        <option value="Mañana">Mañana</option>
-        <option value="Tarde">Tarde</option>
-      </select>
-
-      <button type="submit">Enviar inscripción</button>
-    </form>
-    <p id="mensaje" class="mensaje"></p>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+  </body>
 </html>

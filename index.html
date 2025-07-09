@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscripción Taller de Pintura</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGO -->
+  <img src="assets/logo.png" alt="Logo Desarrollo Humano" class="logo">
+
+  <!-- CUADROS DE INFO DE TURNOS -->
+  <div class="turnos-info">
+    <div class="turno-card">
+      <h3>Turno Mañana</h3>
+      <p>Total de Asientos: 12</p>
+      <p>Disponibles: <span id="cuposManiana">-</span></p>
+    </div>
+    <div class="turno-card tarde">
+      <h3>Turno Tarde</h3>
+      <p>Total de Asientos: 12</p>
+      <p>Disponibles: <span id="cuposTarde">-</span></p>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="container">
+    <h1>Inscripción al Taller de Pintura</h1>
+    <form id="registro-form">
+      <label>Apellido y Nombre</label>
+      <input type="text" name="nombre" required>
+
+      <label>DNI Nº</label>
+      <input type="number" name="dni" required>
+
+      <label>Área</label>
+      <input type="text" name="area" required>
+
+      <label>Legajo</label>
+      <input type="text" name="legajo" required>
+
+      <label>Correo</label>
+      <input type="email" name="correo" required>
+
+      <label>Turno</label>
+      <select name="turno" id="turno" required>
+        <option value="">Seleccioná un turno</option>
+        <option value="Mañana">Mañana</option>
+        <option value="Tarde">Tarde</option>
+      </select>
+
+      <button type="submit">Enviar inscripción</button>
+    </form>
+    <p id="mensaje" class="mensaje"></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

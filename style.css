@@ -1,138 +1,120 @@
-/* Fuente y ajustes generales */
+/* === Reset y base === */
 body {
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
   background-color: #f9f6f1;
-  color: #222;
-  text-align: center;
+  color: #333;
 }
 
-/* Logo */
+/* === Logo === */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 .logo {
-  max-width: 200px;
-  margin: 30px auto 10px;
-  display: block;
+  width: 160px; /* tamaño aumentado */
+  height: auto;
 }
 
-/* Títulos */
-h1 {
-  font-size: 24px;
-  color: #0c8b42;
+/* === Título === */
+.titulo {
+  text-align: center;
+  color: #007e3a;
+  margin-top: 10px; /* menos espacio con el logo */
   margin-bottom: 20px;
-}
-h3 {
-  margin: 10px 0 5px;
+  font-size: 24px;
 }
 
-/* Contenedor del formulario */
-.container {
+/* === Contenedor del formulario === */
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+form {
+  background-color: transparent;
+  width: 100%;
   max-width: 400px;
-  margin: auto;
-  background-color: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Etiquetas y campos */
 label {
-  display: block;
-  text-align: left;
-  margin-top: 15px;
   font-weight: bold;
+  margin-top: 10px;
 }
 
 input,
 select {
-  width: 100%;
   padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
   border-radius: 8px;
+  border: 1px solid #ccc;
   font-size: 16px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* Botón de envío */
-button[type="submit"] {
-  background-color: #f72585; /* rosa fuerte para destacar */
-  color: white;
-  padding: 12px;
-  font-size: 16px;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-button[type="submit"]:hover {
-  background-color: #d61e72;
-}
-
-/* Estilo de las tarjetas de turno */
+/* === Tarjetas de turnos === */
 .turnos-info {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 25px;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
   flex-wrap: wrap;
 }
 
 .turno-card {
-  width: 160px;
-  padding: 15px;
+  flex: 1;
+  text-align: center;
   border-radius: 12px;
-  color: white;
+  padding: 12px;
   font-weight: bold;
-}
-
-.turno-card:first-child {
-  background-color: #20c997; /* verde */
-}
-
-.turno-card.tarde {
-  background-color: #f72585; /* fucsia */
-}
-
-/* Página de agradecimiento */
-.gracias-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 30px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  margin-top: 50px;
-}
-.gracias-titulo {
-  color: #0c8b42;
-  font-size: 24px;
-}
-.gracias-texto {
+  color: #fff;
   font-size: 16px;
-  margin-top: 15px;
 }
 
-/* Botón de volver */
-.btn-volver {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 20px;
-  background-color: #0c8b42;
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-}
-.btn-volver:hover {
-  background-color: #087037;
+.manana {
+  background-color: #14c58d;
 }
 
-/* Responsividad */
-@media (max-width: 500px) {
+.tarde {
+  background-color: #ec2b7f;
+}
+
+/* === Botón === */
+.btn-enviar {
+  background-color: #8e24aa; /* morado estilo Material Design */
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-top: 10px; /* reducido para acercar al bloque anterior */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-enviar:hover {
+  background-color: #6a1b9a;
+}
+
+/* === Mensaje de validación === */
+.mensaje {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* === Responsivo === */
+@media screen and (max-width: 500px) {
   .turnos-info {
     flex-direction: column;
-    align-items: center;
+  }
+  .turno-card {
+    width: 100%;
   }
 }

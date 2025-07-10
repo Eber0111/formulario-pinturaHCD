@@ -90,10 +90,10 @@ select {
   background-color: #8e24aa; /* morado estilo Material Design */
   color: #fff;
   border: none;
-  padding: 12px;
+  padding: 18px;
   font-size: 16px;
   border-radius: 8px;
-  margin-top: 10px; /* reducido para acercar al bloque anterior */
+  /*margin-top: 4px; /* reducido para acercar al bloque anterior */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

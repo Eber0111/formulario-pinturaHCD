@@ -88,13 +88,3 @@ select {
   font-size: 14px;
   text-align: center;
 }
-
-/* === Responsivo === */
-@media screen and (max-width: 500px) {
-  .turnos-info {
-    flex-direction: column;
-  }
-  .turno-card {
-    width: 100%;
-  }
-}

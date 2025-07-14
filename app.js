@@ -10,24 +10,7 @@ import {
 const db = window.firestore;
 const form = document.getElementById("registro-form");
 const mensaje = document.getElementById("mensaje");
-const cuposManiana = document.getElementById("cuposManiana");
-const cuposTarde = document.getElementById("cuposTarde");
 const MAX_CUPO = 12;
-
-async function actualizarCupos() {
-  const q = query(collection(db, "inscripciones"));
-  const querySnapshot = await getDocs(q);
-
-  let cuenta = { "Mañana": 0, "Tarde": 0 };
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    if (data.turno === "Mañana") cuenta["Mañana"]++;
-    if (data.turno === "Tarde") cuenta["Tarde"]++;
-  });
-
-  cuposManiana.textContent = MAX_CUPO - cuenta["Mañana"];
-  cuposTarde.textContent = MAX_CUPO - cuenta["Tarde"];
-}
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -47,15 +30,15 @@ form.addEventListener("submit", async (e) => {
 
   try {
     // Verificar duplicado por DNI o legajo
-    const q = query(
+    const dupDni = query(
       collection(db, "inscripciones"),
       where("dni", "==", dni)
     );
-    const q2 = query(
+    const dupLegajo = query(
       collection(db, "inscripciones"),
       where("legajo", "==", legajo)
     );
-    const [snap1, snap2] = await Promise.all([getDocs(q), getDocs(q2)]);
+    const [snap1, snap2] = await Promise.all([getDocs(dupDni), getDocs(dupLegajo)]);
 
     if (!snap1.empty || !snap2.empty) {
       mensaje.textContent = "Ya estás registrado en este taller.";
@@ -63,14 +46,15 @@ form.addEventListener("submit", async (e) => {
     }
 
     // Verificar cupo
-    const q3 = query(
+    const turnoQ = query(
       collection(db, "inscripciones"),
       where("turno", "==", turno)
     );
-    const inscriptosTurno = await getDocs(q3);
+    const turnoSnap = await getDocs(turnoQ);
 
-    if (inscriptosTurno.size >= MAX_CUPO) {
-      mensaje.textContent = `El cupo para el turno ${turno} está completo.`;
+    if (turnoSnap.size >= MAX_CUPO) {
+      // Redirigir a página de cupo completo
+      window.location.href = `cupo-completo.html?turno=${encodeURIComponent(turno)}`;
       return;
     }
 
@@ -93,6 +77,3 @@ form.addEventListener("submit", async (e) => {
     mensaje.textContent = "Ocurrió un error. Intentá de nuevo más tarde.";
   }
 });
-
-// Al cargar la página
-actualizarCupos();

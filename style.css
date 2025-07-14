@@ -8,15 +8,22 @@ body {
 }
 
 /* === Logo === */
-.logo-container {
+/* Header con dos logos extremos */
+.header {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;    /* ancho del formulario */
+  margin: 0 auto 20px; /* centrado + espacio abajo */
+  padding: 0 10px;
 }
-.logo {
-  width: 160px; /* tamaño aumentado */
-  height: auto;
+.logo-left,
+.logo-right {
+  height: 60px;
+  width: auto;
 }
+
 
 /* === Título === */
 .titulo {
@@ -58,33 +65,6 @@ select {
   box-sizing: border-box;
 }
 
-/* === Tarjetas de turnos === */
-.turnos-info {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
-  flex-wrap: wrap;
-}
-
-.turno-card {
-  flex: 1;
-  text-align: center;
-  border-radius: 12px;
-  padding: 12px;
-  font-weight: bold;
-  color: #fff;
-  font-size: 16px;
-}
-
-.manana {
-  background-color: #14c58d;
-}
-
-.tarde {
-  background-color: #ec2b7f;
-}
-
 /* === Botón === */
 .btn-enviar {
   background-color: #8e24aa; /* morado estilo Material Design */
@@ -93,7 +73,7 @@ select {
   padding: 18px;
   font-size: 16px;
   border-radius: 8px;
-  /*margin-top: 4px; /* reducido para acercar al bloque anterior */
+  margin-top: 4px; /* reducido para acercar al bloque anterior */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

@@ -4,13 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Inscripción Taller de Pintura</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pO1mE6prnB9Sa1i9T2tWgGQR6X9SLfOl8bhuSNMlR5h60n5Idr98u+OwKj6xhtywt0DYwKkFgeSXu+QNNPsKbw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- LOGO -->
-    <div class="logo-container">
-      <img src="assets/logo.png" alt="Logo Dirección de Desarrollo Humano" class="logo" />
-    </div>
+    <!-- === ENCABEZADO CON 2 LOGOS === -->
+  <header class="header">
+    <img src="assets/logo1.png" alt="Logo secundario" class="logo-left" />
+    <img src="assets/logo.png"  alt="Logo Dirección de Desarrollo Humano" class="logo-right" />
+  </header>
 
     <!-- TÍTULO -->
     <h1 class="titulo">Inscripción al Taller de Pintura</h1>
@@ -36,27 +44,16 @@
         <label for="turno">Turno</label>
         <select id="turno" name="turno" required>
           <option value="">Seleccioná un turno</option>
-          <option value="Mañana">Mañana (12)</option>
-          <option value="Tarde">Tarde (12)</option>
+          <option value="Mañana">Mañana</option>
+          <option value="Tarde">Tarde</option>
         </select>
-
-        <!-- TARJETAS DE TURNOS -->
-        <div class="turnos-info">
-          <div class="turno-card manana">
-            <strong>Mañana (12)</strong>
-            <p>Disponible lugar: <span id="cuposManiana">-</span></p>
-          </div>
-          <div class="turno-card tarde">
-            <strong>Tarde (12)</strong>
-            <p>Disponible lugar: <span id="cuposTarde">-</span></p>
-          </div>
-        </div>
 
         <!-- MENSAJE DE VALIDACIÓN -->
         <p id="mensaje" class="mensaje"></p>
 
         <!-- BOTÓN DE ENVÍO -->
-        <button type="submit" class="btn-enviar">Enviar inscripción</button>
+        <button type="submit" class="btn-enviar">
+        <i class="fas fa-paper-plane"></i> Enviar inscripción</button>
       </form>
     </div>
 

@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cupo Completo</title>
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer"
-  />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffeaea; /* tono rosado claro */
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .icon {
-      font-size: 60px;
-      color: #ec2b7f;
-      margin-bottom: 20px;
-    }
-    h1 { font-size: 24px; margin-bottom: 15px; }
-    p  { font-size: 16px; margin-bottom: 25px; }
-    a {
-      display: inline-block;
-      background: #ec2b7f;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    a:hover { background: #c2185b; }
-  </style>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cupo Completo</title>
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <style>
+        body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #ffeaea; /* tono rosado claro */
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        text-align: center;
+        }
+        .icon {
+        font-size: 60px;
+        color: #ec2b7f;
+        margin-bottom: 20px;
+        }
+        h1 { font-size: 24px; margin-bottom: 15px; }
+        p  { font-size: 16px; margin-bottom: 25px; }
+        a {
+        display: inline-block;
+        background: #ec2b7f;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        }
+        a:hover { background: #c2185b; }
+    </style>
 </head>
 <body>
-  <div class="icon"><i class="fas fa-ban"></i></div>
-  <h1>Cupo completo</h1>
-  <p id="texto">
-    <!-- Aquí irá el mensaje dinámico -->
-  </p>
-  <a href="index.html">Volver al formulario</a>
+    <div class="icon"><i class="fas fa-ban"></i></div>
+    <h1>Cupo completo</h1>
+    <p id="texto">
+        <!-- Aquí irá el mensaje dinámico -->
+    </p>
+    <a href="index.html">Volver al formulario</a>
 
-  <script>
-    // Leer el turno de la URL
-    const params = new URLSearchParams(location.search);
-    const turno = params.get('turno') || 'este turno';
-    document.getElementById('texto').innerText =
-      `Lo sentimos, el cupo para el turno "${turno}" ya está completo. ` +
-      `Por favor, acercate a la Dirección de Desarrollo Humano para recibir más información. ¡Gracias por tu interés!`;
-  </script>
+    <script>
+        // Leer el turno de la URL
+        const params = new URLSearchParams(location.search);
+        const turno = params.get('turno') || 'este turno';
+        document.getElementById('texto').innerHTML =
+            `Lo sentimos, el cupo para el turno <strong>"${turno}"</strong> ya está completo. ` +
+            `Por favor, acercate a la <strong>Dirección de Desarrollo Humano</strong> para recibir más información. ¡Gracias por tu interés!`;
+    </script>
 </body>
 </html>

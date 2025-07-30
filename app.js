@@ -10,7 +10,7 @@ import {
 const db = window.firestore;
 const form = document.getElementById("registro-form");
 const mensaje = document.getElementById("mensaje");
-const MAX_CUPO = 12;
+const MAX_CUPO = 15;
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -22,6 +22,8 @@ form.addEventListener("submit", async (e) => {
   const legajo = form.legajo.value.trim();
   const correo = form.correo.value.trim();
   const turno = form.turno.value;
+  const telefono = form.telefono.value.trim(); // <-- nuevo campo (opcional)
+
 
   if (!nombre || !dni || !area || !legajo || !correo || !turno) {
     mensaje.textContent = "Por favor, completá todos los campos.";
@@ -65,6 +67,7 @@ form.addEventListener("submit", async (e) => {
       area,
       legajo,
       correo,
+      telefono,
       turno,
       timestamp: new Date()
     });

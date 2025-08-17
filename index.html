@@ -68,19 +68,22 @@
 
       <!-- Firebase SDK -->
       <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
         const firebaseConfig = {
-        apiKey: "AIzaSyAkbxmxmfUOZQn63FXduw73yq9V8pTwY8s",
-        authDomain: "formulariohcd.firebaseapp.com",
-        projectId: "formulariohcd",
-        storageBucket: "formulariohcd.firebasestorage.app",
-        messagingSenderId: "553137543966",
-        appId: "1:553137543966:web:c67980fe49501778e9c70f"
-      };
+          apiKey: "AIzaSyAkbxmxmfUOZQn63FXduw73yq9V8pTwY8s",
+          authDomain: "formulariohcd.firebaseapp.com",
+          projectId: "formulariohcd",
+          storageBucket: "formulariohcd.firebasestorage.app",
+          messagingSenderId: "553137543966",
+          appId: "1:553137543966:web:c67980fe49501778e9c70f"
+        };
 
-
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         window.firestore = db; // Lo hacemos global para usarlo en app.js

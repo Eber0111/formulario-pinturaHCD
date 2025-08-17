@@ -5,7 +5,7 @@ import {
   getDocs,
   query,
   where
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "firebase/app";
 
 const db = window.firestore;
 const form = document.getElementById("registro-form");
